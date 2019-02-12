@@ -26,6 +26,12 @@
             <artifactId>flowable-spring-boot-starter</artifactId>
             <version>6.4.1</version>
         </dependency>
+        <!--flowable 状态监控用-->
+        <!--<dependency>-->
+            <!--<groupId>org.flowable</groupId>-->
+            <!--<artifactId>flowable-spring-boot-starter-actuator</artifactId>-->
+            <!--<version>6.4.0</version>-->
+        <!--</dependency>-->
         <!--mysql依赖-->
         <dependency>
             <groupId>mysql</groupId>

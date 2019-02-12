@@ -7,3 +7,9 @@ spring:
 flowable:
 #关闭定时任务JOB
   async-executor-activate: false
+
+#flowable 状态监控（flowable 6.4.1下启动报错）
+management:
+  endpoint:
+    flowable:
+      enabled: false
