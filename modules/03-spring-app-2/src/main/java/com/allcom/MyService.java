@@ -31,8 +31,9 @@ public class MyService {
     public void startProcess(String assignee) {
         Person person = appRepository.findByUsername(assignee);
         Map<String, Object> variables = new HashMap<String, Object>();
-        variables.put("person", person.getUsername());     // 或者可以 variables.put("person", person.getPersonid());
-        // 以上如果直接用person，会报无法序列化的错误
+        //variables.put("person", person.getUsername());     // 或者可以 variables.put("person", person.getPersonid());
+        variables.put("person", person);
+        // 以上如果直接用person，会报无法序列化的错误;但如果类Person implements Serializable，就可以了！
         runtimeService.startProcessInstanceByKey("oneTaskProcess",variables);
     }
 

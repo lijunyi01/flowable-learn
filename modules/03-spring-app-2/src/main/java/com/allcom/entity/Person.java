@@ -1,9 +1,12 @@
 package com.allcom.entity;
 
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Person {
+public class Person implements Serializable {
+
+  private static final long serialVersionUID = -5809782578272943999L;
 
   private Integer personid;
   private String username;
