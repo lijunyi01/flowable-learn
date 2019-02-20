@@ -27,19 +27,38 @@ public class MyService {
     @Autowired
     private AppRepository appRepository;
 
+//    @Transactional
+//    public void startProcess(String assignee) {
+//        Person person = appRepository.findByUsername(assignee);
+//        Map<String, Object> variables = new HashMap<String, Object>();
+//        //variables.put("person", person.getUsername());     // 或者可以 variables.put("person", person.getPersonid());
+//        variables.put("person", person);
+//        // 以上如果直接用person，会报无法序列化的错误;但如果类Person implements Serializable，就可以了！
+//        // runtimeService.startProcessInstanceByKey("oneTaskProcess",variables);
+//        runtimeService.startProcessInstanceByKey("soa",variables);
+//    }
+
     @Transactional
     public void startProcess(String assignee) {
         Person person = appRepository.findByUsername(assignee);
+        // 通过上下文context获取当前用户 或者 从参数传入启动流程的用户
+        String currentUser = "ljy";    // String currentUser = appService.getCurrentUser();
+        // String currentUser = assignee;
         Map<String, Object> variables = new HashMap<String, Object>();
-        //variables.put("person", person.getUsername());     // 或者可以 variables.put("person", person.getPersonid());
-        variables.put("person", person);
+        variables.put("INITIATOR",currentUser);
         // 以上如果直接用person，会报无法序列化的错误;但如果类Person implements Serializable，就可以了！
-        runtimeService.startProcessInstanceByKey("oneTaskProcess",variables);
+        // runtimeService.startProcessInstanceByKey("oneTaskProcess",variables);
+        runtimeService.startProcessInstanceByKey("soa",variables);
     }
 
     @Transactional
     public List<Task> getTasks(String assignee) {
         return taskService.createTaskQuery().taskAssignee(assignee).list();
+    }
+
+    @Transactional
+    public List<Task> getAllTasks() {
+        return taskService.createTaskQuery().list();
     }
 
 

@@ -20,6 +20,7 @@ public class MyRestController {
         myService.startProcess(startProcessRepresentation.getAssignee());
     }
 
+    // 与客户端交互的domain层类
     static class StartProcessRepresentation {
 
         private String assignee;
@@ -45,6 +46,17 @@ public class MyRestController {
         return dtos;
     }
 
+    @RequestMapping(value="/alltasks", method= RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+    public List<TaskRepresentation> getAllTasks() {
+        List<Task> tasks = myService.getAllTasks();
+        List<TaskRepresentation> dtos = new ArrayList<TaskRepresentation>();
+        for (Task task : tasks) {
+            dtos.add(new TaskRepresentation(task.getId(), task.getName()));
+        }
+        return dtos;
+    }
+
+    // 与客户端交互的domain层类
     static class TaskRepresentation {
 
         private String id;
